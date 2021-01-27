@@ -270,19 +270,31 @@ def loadKinova():
 class TiagoLoader(RobotLoader):
     path = "tiago_description"
     urdf_filename = "tiago.urdf"
-
-
+    srdf_filename = "tiago.srdf"
+    ref_posture   = "tuck_arm"
+    
 class TiagoNoHandLoader(TiagoLoader):
     urdf_filename = "tiago_no_hand.urdf"
 
 
-def loadTiago(hand=True):
+class TiagoWsgLoader(TiagoLoader):
+    urdf_filename = "tiago_schunk_wsg.urdf"
+    srdf_filename = "tiago_schunk_wsg.srdf"
+    ref_posture   = "tuck_arm"
+    # free_flyer    = True
+
+def loadTiago(hand=True, end_effector='wsg'):
     if hand:
-        warnings.warn(_depr_msg('loadTiago()', 'tiago'), DeprecationWarning, 2)
-        loader = TiagoLoader
+        if end_effector != 'wsg':
+            warnings.warn(_depr_msg('loadTiago()', 'tiago'), DeprecationWarning, 2)
+            loader = TiagoLoader        
+        else: 
+            warnings.warn(_depr_msg('loadTiago()', 'tiago_wsg'), DeprecationWarning, 2)
+            loader = TiagoWsgLoader
     else:
         warnings.warn(_depr_msg('loadTiago(hand=False)', 'tiago_no_hand'), DeprecationWarning, 2)
         loader = TiagoNoHandLoader
+    
     return loader().robot
 
 
@@ -290,6 +302,10 @@ def loadTiagoNoHand():
     warnings.warn(_depr_msg('loadTiagoNoHand()', 'tiago_no_hand'), DeprecationWarning, 2)
     return loadTiago(hand=False)
 
+
+def loadTiagoWsg():
+    warnings.warn(_depr_msg('loadTiagoWsg()', 'tiago_wsg'), DeprecationWarning, 2)
+    return loadTiago(hand=False, end_effector='wsg')
 
 class ICubLoader(RobotLoader):
     path = "icub_description"
@@ -459,6 +475,7 @@ ROBOTS = {
     'talos_full_box': TalosFullBoxLoader,
     'tiago': TiagoLoader,
     'tiago_no_hand': TiagoNoHandLoader,
+    'tiago_wsg': TiagoWsgLoader,
     'ur3': UR5Loader,
     'ur3_gripper': UR3GripperLoader,
     'ur3_limited': UR3LimitedLoader,
