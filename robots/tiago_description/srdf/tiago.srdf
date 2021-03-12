@@ -15,7 +15,7 @@
         <joint name="arm_4_joint" value="1.94" />
         <joint name="arm_5_joint" value="-1.57" />
         <joint name="arm_6_joint" value="1.37" />
-        <joint name="arm_7_joint" value="0.0" />
+        <joint name="arm_7_joint" value="1.0" />
   </group_state>
 
   <disable_collisions link1="torso_fixed_link" link2="arm_2_link" reason="User defined" />
