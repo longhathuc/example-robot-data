@@ -246,7 +246,7 @@ class SoloLoader(RobotLoader):
 
 
 class Solo12Loader(SoloLoader):
-    urdf_filename = "solo12.urdf"
+    urdf_filename = "solo12.urdf"   
 
 
 def loadSolo(solo=True):
@@ -272,10 +272,12 @@ class TiagoLoader(RobotLoader):
     urdf_filename = "tiago.urdf"
     srdf_filename = "tiago.srdf"
     ref_posture   = "tuck_arm"
-    
+    # free_flyer    = True
 class TiagoNoHandLoader(TiagoLoader):
     urdf_filename = "tiago_no_hand.urdf"
 
+class TiagoNoHandHeadFixedLoader(TiagoLoader):
+    urdf_filename = "tiago_no_hand_head_fixed.urdf"
 
 class TiagoWsgLoader(TiagoLoader):
     urdf_filename = "tiago_schunk_wsg.urdf"
@@ -475,6 +477,7 @@ ROBOTS = {
     'talos_full_box': TalosFullBoxLoader,
     'tiago': TiagoLoader,
     'tiago_no_hand': TiagoNoHandLoader,
+    'tiago_no_hand_head_fixed': TiagoNoHandHeadFixedLoader,
     'tiago_wsg': TiagoWsgLoader,
     'ur3': UR5Loader,
     'ur3_gripper': UR3GripperLoader,
